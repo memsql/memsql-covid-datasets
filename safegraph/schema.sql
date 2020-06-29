@@ -49,7 +49,6 @@ CREATE TABLE places_footprint (
     iso_country_code TEXT,
     area_square_feet INT,
 
-    -- TODO: figure out sort key
     KEY (safegraph_place_id) USING CLUSTERED COLUMNSTORE,
     SHARD ()
 );
@@ -82,7 +81,6 @@ CREATE TABLE places_patterns_monthly (
     popularity_by_day JSON,
     device_type JSON,
 
-    -- TODO: figure out sort key
     KEY (date_range_start) USING CLUSTERED COLUMNSTORE,
     KEY (safegraph_place_id) USING HASH,
     SHARD ()
@@ -115,7 +113,6 @@ CREATE TABLE IF NOT EXISTS places_patterns_weekly (
     related_same_week_brand JSON,
     device_type JSON,
 
-    -- TODO: figure out sort key
     KEY (date_range_start) USING CLUSTERED COLUMNSTORE,
     KEY (safegraph_place_id) USING HASH,
     SHARD ()
@@ -146,7 +143,6 @@ CREATE TABLE social_distancing (
     mean_non_home_dwell_time INT,
     mean_distance_traveled_from_home INT,
 
-    -- TODO: figure out sort key
     KEY (date_range_start) USING CLUSTERED COLUMNSTORE,
     KEY (origin_census_block_group) USING HASH,
     SHARD ()
@@ -164,6 +160,7 @@ CREATE TABLE tx_daily_deposits_zip (
     SHARD ()
 );
 
+-- 2019-07-07,5815,17055,1,1,1.41
 CREATE TABLE tx_daily_spend_brand (
     day DATETIME,
     merchant_name TEXT,

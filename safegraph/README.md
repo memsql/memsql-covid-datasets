@@ -27,24 +27,27 @@ dataset fits within MemSQL Free Edition's usage limits.
 
 # Load Data
 
-The following instructions make the following assumptions:
+The following examples require setting these environment variables:
 
-* MemSQL is running on your machine with host `127.0.0.1`, port `3306`, user
-  `root` and no password
-* You have exported your SafeGraph access key and secret key in your shell
-  environment named like so:
-  ```bash
-  export SAFEGRAPH_ACCESS_KEY="***********************"
-  export SAFEGRAPH_SECRET_KEY="***********************"
-  ```
+```bash
+# Your MemSQL cluster connection details
+export MEMSQL_HOST="127.0.0.1"
+export MEMSQL_PORT="3306"
+export MEMSQL_USER="root"
+export MEMSQL_PASS=""
+
+# Your SafeGraph access and secret key from https://catalog.safegraph.io/app/information
+export SAFEGRAPH_ACCESS_KEY="***********************"
+export SAFEGRAPH_SECRET_KEY="***********************"
+```
 
 ## Setup the schema and start loading data
 
 > Note the following commands requires the `envsubst` program to be installed
 
 ```bash
-cat schema.sql | memsql -u root -h 127.0.0.1 -P 3306
-cat pipelines.sql | envsubst | memsql -u root -h 127.0.0.1 -P 3306 safegraph
+cat schema.sql | memsql -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS}
+cat pipelines.sql | envsubst | memsql -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS} safegraph
 ```
 
 ## Core Places (POI)
@@ -55,5 +58,5 @@ installed.
 
 ```bash
 ./core-places-download.sh
-./core-places-load.sh | memsql -u root -h 127.0.0.1 -P 3306 safegraph
+./core-places-load.sh | memsql --local-infile -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS} safegraph
 ```
