@@ -6,5 +6,5 @@ the purpose of COVID related research.
 
 View the dataset specific README files for more details!
 
-* [Open American Census Data](/tree/master/american_census)
-* [SafeGraph](/tree/master/safegraph)
+* [Open American Census Data](/american_census)
+* [SafeGraph](/safegraph)
