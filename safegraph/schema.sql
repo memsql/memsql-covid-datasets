@@ -1,7 +1,4 @@
-CREATE DATABASE safegraph;
-USE safegraph;
-
-CREATE TABLE places_brand_info (
+CREATE TABLE IF NOT EXISTS places_brand_info (
     safegraph_brand_id TEXT,
     brand_name TEXT,
     parent_safegraph_brand_id TEXT,
@@ -13,7 +10,7 @@ CREATE TABLE places_brand_info (
     PRIMARY KEY (safegraph_brand_id)
 );
 
-CREATE TABLE places_poi (
+CREATE TABLE IF NOT EXISTS places_poi (
     safegraph_place_id TEXT,
     parent_safegraph_place_id TEXT,
     location_name TEXT,
@@ -40,7 +37,7 @@ CREATE TABLE places_poi (
     SHARD (safegraph_place_id)
 );
 
-CREATE TABLE places_footprint (
+CREATE TABLE IF NOT EXISTS places_footprint (
     safegraph_place_id TEXT,
     location_name TEXT,
     polygon_class TEXT,
@@ -53,7 +50,7 @@ CREATE TABLE places_footprint (
     SHARD ()
 );
 
-CREATE TABLE places_patterns_monthly (
+CREATE TABLE IF NOT EXISTS places_patterns_monthly (
     safegraph_place_id TEXT,
     location_name TEXT,
     street_address TEXT,
@@ -86,7 +83,7 @@ CREATE TABLE places_patterns_monthly (
     SHARD ()
 );
 
-CREATE TABLE IF NOT EXISTS places_patterns_weekly (
+CREATE TABLE IF NOT EXISTS IF NOT EXISTS places_patterns_weekly (
     safegraph_place_id TEXT,
     location_name TEXT,
     street_address TEXT,
@@ -118,7 +115,7 @@ CREATE TABLE IF NOT EXISTS places_patterns_weekly (
     SHARD ()
 );
 
-CREATE TABLE social_distancing (
+CREATE TABLE IF NOT EXISTS social_distancing (
     origin_census_block_group TEXT,
     date_range_start DATETIME,
     date_range_end DATETIME,
@@ -148,7 +145,7 @@ CREATE TABLE social_distancing (
     SHARD ()
 );
 
-CREATE TABLE tx_daily_deposits_zip (
+CREATE TABLE IF NOT EXISTS tx_daily_deposits_zip (
     day DATETIME,
     zip TEXT,
     num_cards INT,
@@ -160,8 +157,7 @@ CREATE TABLE tx_daily_deposits_zip (
     SHARD ()
 );
 
--- 2019-07-07,5815,17055,1,1,1.41
-CREATE TABLE tx_daily_spend_brand (
+CREATE TABLE IF NOT EXISTS tx_daily_spend_brand (
     day DATETIME,
     merchant_name TEXT,
     safegraph_brand_id TEXT,
@@ -175,7 +171,7 @@ CREATE TABLE tx_daily_spend_brand (
     SHARD ()
 );
 
-CREATE TABLE tx_daily_spend_walmart (
+CREATE TABLE IF NOT EXISTS tx_daily_spend_walmart (
     day DATETIME,
     zip TEXT,
     num_cards INT,
@@ -187,7 +183,7 @@ CREATE TABLE tx_daily_spend_walmart (
     SHARD ()
 );
 
-CREATE TABLE tx_daily_spend_zip_mcc (
+CREATE TABLE IF NOT EXISTS tx_daily_spend_zip_mcc (
     day DATETIME,
     mcc TEXT,
     zip TEXT,
@@ -200,7 +196,7 @@ CREATE TABLE tx_daily_spend_zip_mcc (
     SHARD ()
 );
 
-CREATE TABLE tx_daily_spend_zip (
+CREATE TABLE IF NOT EXISTS tx_daily_spend_zip (
     day DATETIME,
     zip TEXT,
     num_cards INT,

@@ -35,10 +35,19 @@ export MEMSQL_HOST="127.0.0.1"
 export MEMSQL_PORT="3306"
 export MEMSQL_USER="root"
 export MEMSQL_PASS=""
+export MEMSQL_DB="safegraph"
 
 # Your SafeGraph access and secret key from https://catalog.safegraph.io/app/information
 export SAFEGRAPH_ACCESS_KEY="***********************"
 export SAFEGRAPH_SECRET_KEY="***********************"
+```
+
+## Create the database
+
+```bash
+memsql -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} \
+       -u ${MEMSQL_USER} -p${MEMSQL_PASS} \
+       -e "CREATE DATABASE ${MEMSQL_DB}"
 ```
 
 ## Setup the schema and start loading data
@@ -46,8 +55,8 @@ export SAFEGRAPH_SECRET_KEY="***********************"
 > Note the following commands requires the `envsubst` program to be installed
 
 ```bash
-cat schema.sql | memsql -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS}
-cat pipelines.sql | envsubst | memsql -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS} safegraph
+cat schema.sql | memsql -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS} ${MEMSQL_DB}
+cat pipelines.sql | envsubst | memsql -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS} ${MEMSQL_DB}
 ```
 
 ## Core Places (POI)
@@ -58,5 +67,5 @@ installed.
 
 ```bash
 ./core-places-download.sh
-./core-places-load.sh | memsql --local-infile -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS} safegraph
+./core-places-load.sh | memsql --local-infile -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS} ${MEMSQL_DB}
 ```
