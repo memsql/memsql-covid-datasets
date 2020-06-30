@@ -8,7 +8,7 @@ OPTIONALLY ENCLOSED BY '"'
 NULL DEFINED BY '' OPTIONALLY ENCLOSED
 IGNORE 1 LINES;
 
-START PIPELINE places_footprint;
+START PIPELINE IF NOT RUNNING places_footprint;
 
 CREATE OR REPLACE PIPELINE places_patterns_monthly AS
 LOAD DATA S3 'sg-c19-response/monthly-patterns/patterns'
@@ -20,7 +20,7 @@ OPTIONALLY ENCLOSED BY '"'
 NULL DEFINED BY '' OPTIONALLY ENCLOSED
 IGNORE 1 LINES;
 
-START PIPELINE places_patterns_monthly;
+START PIPELINE IF NOT RUNNING places_patterns_monthly;
 
 CREATE OR REPLACE PIPELINE places_patterns_weekly_old AS
 LOAD DATA S3 'sg-c19-response/weekly-patterns/v2/main-file/'
@@ -32,7 +32,7 @@ OPTIONALLY ENCLOSED BY '"'
 NULL DEFINED BY '' OPTIONALLY ENCLOSED
 IGNORE 1 LINES;
 
-START PIPELINE places_patterns_weekly_old;
+START PIPELINE IF NOT RUNNING places_patterns_weekly_old;
 
 CREATE OR REPLACE PIPELINE places_patterns_weekly_new AS
 LOAD DATA S3 'sg-c19-response/weekly-patterns-delivery/weekly/patterns/'
@@ -44,7 +44,7 @@ OPTIONALLY ENCLOSED BY '"'
 NULL DEFINED BY '' OPTIONALLY ENCLOSED
 IGNORE 1 LINES;
 
-START PIPELINE places_patterns_weekly_new;
+START PIPELINE IF NOT RUNNING places_patterns_weekly_new;
 
 CREATE OR REPLACE PIPELINE social_distancing AS
 LOAD DATA S3 'sg-c19-response/social-distancing/v2/'
@@ -57,7 +57,7 @@ TRAILING NULLCOLS
 NULL DEFINED BY '' OPTIONALLY ENCLOSED
 IGNORE 1 LINES;
 
-START PIPELINE social_distancing;
+START PIPELINE IF NOT RUNNING social_distancing;
 
 CREATE OR REPLACE PIPELINE tx_daily_deposits_zip AS
 LOAD DATA S3 'sg-c19-response/transactions-facteus/cut-5-daily-federal-deposits-by-zip/'
@@ -68,7 +68,7 @@ FIELDS TERMINATED BY ','
 NULL DEFINED BY '' OPTIONALLY ENCLOSED
 IGNORE 1 LINES;
 
-START PIPELINE tx_daily_deposits_zip;
+START PIPELINE IF NOT RUNNING tx_daily_deposits_zip;
 
 CREATE OR REPLACE PIPELINE tx_daily_spend_brand AS
 LOAD DATA S3 'sg-c19-response/transactions-facteus/cut-3-daily-spend-by-brand/'
@@ -79,7 +79,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 NULL DEFINED BY '' OPTIONALLY ENCLOSED;
 
-START PIPELINE tx_daily_spend_brand;
+START PIPELINE IF NOT RUNNING tx_daily_spend_brand;
 
 CREATE OR REPLACE PIPELINE tx_daily_spend_walmart AS
 LOAD DATA S3 'sg-c19-response/transactions-facteus/cut-4-daily-spend-at-walmart/'
@@ -89,7 +89,7 @@ INTO TABLE tx_daily_spend_walmart
 FIELDS TERMINATED BY '|'
 NULL DEFINED BY '' OPTIONALLY ENCLOSED;
 
-START PIPELINE tx_daily_spend_walmart;
+START PIPELINE IF NOT RUNNING tx_daily_spend_walmart;
 
 CREATE OR REPLACE PIPELINE tx_daily_spend_zip_mcc AS
 LOAD DATA S3 'sg-c19-response/transactions-facteus/cut-2-daily-spend-by-zip-by-mcc/'
@@ -99,7 +99,7 @@ INTO TABLE tx_daily_spend_zip_mcc
 FIELDS TERMINATED BY ','
 NULL DEFINED BY '' OPTIONALLY ENCLOSED;
 
-START PIPELINE tx_daily_spend_zip_mcc;
+START PIPELINE IF NOT RUNNING tx_daily_spend_zip_mcc;
 
 CREATE OR REPLACE PIPELINE tx_daily_spend_zip AS
 LOAD DATA S3 'sg-c19-response/transactions-facteus/cut-1-daily-spend-by-zip/'
@@ -110,4 +110,4 @@ FIELDS TERMINATED BY ','
 NULL DEFINED BY '' OPTIONALLY ENCLOSED
 IGNORE 1 LINES;
 
-START PIPELINE tx_daily_spend_zip;
+START PIPELINE IF NOT RUNNING tx_daily_spend_zip;

@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS places_patterns_monthly (
     SHARD ()
 );
 
-CREATE TABLE IF NOT EXISTS IF NOT EXISTS places_patterns_weekly (
+CREATE TABLE IF NOT EXISTS places_patterns_weekly (
     safegraph_place_id TEXT,
     location_name TEXT,
     street_address TEXT,
