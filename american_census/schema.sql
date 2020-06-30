@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS geographic_summary (
 );
 
 CREATE TABLE IF NOT EXISTS geometry (
-    census_block_group TEXT NOT NULL,
-    state TEXT NOT NULL,
-    county TEXT NOT NULL,
-    shape GEOGRAPHY NOT NULL,
+    census_block_group TEXT,
+    state TEXT,
+    county TEXT,
+    shape GEOGRAPHY,
 
     KEY (census_block_group),
     SHARD (census_block_group),
