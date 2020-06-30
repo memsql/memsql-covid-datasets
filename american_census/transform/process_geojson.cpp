@@ -9,12 +9,18 @@ using namespace std;
 string toWKTPolygon(json polygon) {
     stringstream out;
     out << "POLYGON (";
+    bool first_part = true;
     for (json part: polygon) {
+        if (first_part) {
+            first_part = false;
+        } else {
+            out << ", ";
+        }
         out << "(";
-        bool first = true;
+        bool first_lonlat = true;
         for (json lonlat: part) {
-            if (first) {
-                first = false;
+            if (first_lonlat) {
+                first_lonlat = false;
             } else {
                 out << ", ";
             }
@@ -26,6 +32,13 @@ string toWKTPolygon(json polygon) {
     return out.str();
 }
 
+string handleStr(json val) {
+    if (val.is_null()) {
+        return "";
+    }
+    return val.get<string>();
+}
+
 int main(int argc, char **argv) {
     std::ifstream input(argv[1]);
     json jsonDoc;
@@ -35,11 +48,11 @@ int main(int argc, char **argv) {
         // coordinates is a list of polygons
         for (json polygon: feature["geometry"]["coordinates"]) {
             cout
-                << feature["properties"]["CensusBlockGroup"].get<string>()
+                << handleStr(feature["properties"]["CensusBlockGroup"])
                 << "\t"
-                << feature["properties"]["State"].get<string>()
+                << handleStr(feature["properties"]["State"])
                 << "\t"
-                << feature["properties"]["County"].get<string>()
+                << handleStr(feature["properties"]["County"])
                 << "\t"
                 << toWKTPolygon(polygon)
                 << "\n";
