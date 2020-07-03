@@ -16,7 +16,7 @@ to us via the contact form at http://memsql.org/.
 
 ## SafeGraph Data Access
 The scripts in this particular folder require an active account with SafeGraph.
-Specifically, these schema's and pipeline statements are designed to be used
+Specifically, these schemas and pipeline statements are designed to be used
 with the data provided through the SafeGraph COVID-19 Data Consortium. To join
 this program please apply here: https://www.safegraph.com/covid-19-data-consortium
 
@@ -69,3 +69,16 @@ installed.
 ./core-places-download.sh
 ./core-places-load.sh | memsql --local-infile -h ${MEMSQL_HOST} -P ${MEMSQL_PORT} -u ${MEMSQL_USER} -p${MEMSQL_PASS} ${MEMSQL_DB}
 ```
+
+# Documentation
+
+SafeGraph provides extensive documentation on all of their datasets. To get
+started here are some direct links to relevant parts of their docs:
+
+* [Core Places][core-places]
+* [Social Distancing][social-distancing]
+* [Weekly Patterns][weekly-patterns]
+
+[core-places]: https://docs.safegraph.com/docs#section-core-places
+[social-distancing]: https://docs.safegraph.com/docs/social-distancing-metrics
+[weekly-patterns]: https://docs.safegraph.com/docs/weekly-patterns
